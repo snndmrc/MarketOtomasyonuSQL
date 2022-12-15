@@ -74,6 +74,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Ekle";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -108,6 +109,7 @@
             this.button2.Text = "Sil";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ımageList1
             // 
@@ -147,6 +149,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "KategoriEkleme";
             this.Text = "KategoriEkleme";
+            this.Load += new System.EventHandler(this.KategoriEkleme_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -155,14 +158,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ImageList ımageList1;
-        private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button button3;
     }
 }

@@ -12,6 +12,7 @@ namespace SuperMarketÖdev
 {
     public partial class ÜrünEkleme : Form
     {
+        public Form2 frm2;
         public ÜrünEkleme()
         {
             InitializeComponent();
@@ -24,19 +25,18 @@ namespace SuperMarketÖdev
 
         private void button2_Click(object sender, EventArgs e)
         {
-            KategoriEkleme frm4= new KategoriEkleme();
-            frm4.ShowDialog();
+            frm2.kategoriEkleme.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FirmaEkleme frm5 = new FirmaEkleme();
-            frm5.ShowDialog();
+            frm2.firmaEkleme.ShowDialog();
         }
 
         private void ÜrünEkleme_Load(object sender, EventArgs e)
         {
-
+            frm2.firmaComboEkle();
+            frm2.kategoriComboEkle();
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -46,12 +46,37 @@ namespace SuperMarketÖdev
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            frm2.urunKoduKontrol();
+            if (frm2.durum == false)
+            {
+                if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "")
+                {
+                    frm2.bag.Open();
+                    frm2.kmt.Connection = frm2.bag;//http://www.gorselprogramlama.com
+                    frm2.kmt.CommandText = "INSERT INTO Urun(Urun_Adi,Urun_Kodu,Firma_Adi,Alis_Fiyati,Satis_Fiyati,Kategori) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','" + comboBox1.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + comboBox2.Text + "') ";
+                    //kayıt ekleme sorgu metni
+                    frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
+                    frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
+                    frm2.bag.Close(); //veritabanımızı kapatıyoruz
+                    frm2.urunListele();
+                    MessageBox.Show("Kayıt işlemi tamamlandı ! ");
+                    for (int i = 0; i < this.Controls.Count; i++)
+                    {
+                        if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
+                        if (this.Controls[i] is ComboBox) this.Controls[i].Text = "";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Lütfen Ürün Adı - Ürün Kodu alanlarını boş bırakmayınız !!!");
+                }
+            }
+            else MessageBox.Show("Girmiş olduğunuz Ürün Kodu mevcut !");
         }
 
         private void label6_Click(object sender, EventArgs e)

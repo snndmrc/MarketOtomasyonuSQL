@@ -12,6 +12,7 @@ namespace SuperMarketÖdev
 {
     public partial class KategoriEkleme : Form
     {
+        public Form2 frm2;
         public KategoriEkleme()
         {
             InitializeComponent();
@@ -19,9 +20,68 @@ namespace SuperMarketÖdev
 
         private void button3_Click(object sender, EventArgs e)
         {
-            KategoriEkleme geri = new KategoriEkleme();
-            this.Close();
+            Close();
            
+        }
+
+        private void KategoriEkleme_Load(object sender, EventArgs e)
+        {
+            frm2.kategoriListele();
+            try
+            {
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.Columns[0].HeaderText = "Kategori Adı";
+            }//http://www.gorselprogramlama.com
+            catch
+            {
+                ;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Trim() != "")
+            {
+                frm2.bag.Open();
+                frm2.kmt.Connection = frm2.bag;
+                frm2.kmt.CommandText = "INSERT INTO Kategori(Kategori_Adi) VALUES ('" + textBox1.Text + "') ";
+                //kayıt ekleme sorgu metni
+                frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
+                frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
+                frm2.bag.Close(); //veritabanımızı kapatıyoruz
+                frm2.kategoriListele();
+                frm2.kategoriComboEkle();
+                MessageBox.Show("Kayıt işlemi tamamlandı ! ");
+                textBox1.Text = "";//http://www.gorselprogramlama.com
+            }
+            else
+            {
+                MessageBox.Show("Lütfen Kategori Adı alanını boş bırakmayınız !!!");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult cevap;
+
+                cevap = MessageBox.Show("Kaydı silmek istediğinizden eminmisiniz", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
+                {
+                    frm2.bag.Open();
+                    frm2.kmt.Connection = frm2.bag;
+                    frm2.kmt.CommandText = "DELETE from Kategori WHERE Kategori_Adi='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "' ";
+                    frm2.kmt.ExecuteNonQuery();
+                    frm2.kmt.Dispose();
+                    frm2.bag.Close();//http://www.gorselprogramlama.com
+                    frm2.kategoriListele();
+                }
+            }
+            catch (Exception hata)
+            {
+                MessageBox.Show(hata.Message);
+            }
         }
     }
 }

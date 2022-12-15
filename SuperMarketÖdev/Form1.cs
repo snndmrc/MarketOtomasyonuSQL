@@ -21,39 +21,12 @@ namespace SuperMarketÖdev
         SqlConnection con;
         SqlDataReader dr;
         SqlCommand com;
-        /*
-        public Form1 login;
-        public Form2 ana_Sayfa;
-        public ÜrünEkranı ürünEkranı;
-        public ÜrünEkleme ürünekleme;
-        public MüşteriBilgileri müşteriBilgileri;
-        public MüşteriEkleme müşteriEkleme;
-        public KasiyerEkleme kasiyerEkleme;
-        public Kasiyerİşlemleri kasiyerİşlemleri;
-        public SatisIslemleri satisIslemleri;
-        public KategoriEkleme kategoriEkleme;
-        public FirmaEkleme firmaEkleme;
-        public Stokİşlemleri stokİşlemleri;
-        public YeniStokEkleme yeniStokEkleme;
-        */
-    
+
+
+
         public Form1()
         {
             InitializeComponent();
-           /* login = new Form1();
-            ana_Sayfa = new Form2();
-            ürünEkranı = new ÜrünEkranı();
-            ürünekleme = new ÜrünEkleme();
-            müşteriBilgileri = new MüşteriBilgileri();
-            müşteriEkleme = new MüşteriEkleme();
-            kasiyerEkleme = new KasiyerEkleme();
-            kasiyerİşlemleri = new Kasiyerİşlemleri();
-            satisIslemleri = new SatisIslemleri();
-            kategoriEkleme = new KategoriEkleme();
-            firmaEkleme = new FirmaEkleme();
-            stokİşlemleri = new Stokİşlemleri();
-            yeniStokEkleme = new YeniStokEkleme();*/
-
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -65,19 +38,19 @@ namespace SuperMarketÖdev
         {
             string user = textBox1.Text;
             string password = textBox2.Text;
-            con = new SqlConnection("Data Source=MSIBRAVO\\SQLEXPRESS01;Initial Catalog=Market_Otomasyonu;Integrated Security=True");
+            con = new SqlConnection("Data Source=MSIBRAVO\\SQLEXPRESS01;Initial Catalog=Tablo;Integrated Security=True");
             com = new SqlCommand();
             con.Open();
             com.Connection= con;
-            com.CommandText = "Select *From Giriss where Kullanici_Adi='" + textBox1.Text 
+            com.CommandText = "Select *From giris where Kullanici_Adi='" + textBox1.Text 
                 + "'And Sifre ='" + textBox2.Text + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
              
-                Form2 anasayfa = new Form2();
+                Form2 frm2 = new Form2();
                 this.Hide();
-                anasayfa.ShowDialog();
+                frm2.ShowDialog();
                
                 
                
