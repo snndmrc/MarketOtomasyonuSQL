@@ -28,16 +28,16 @@ namespace SuperMarketÖdev
             frm2.urunKontrol();
             if (textBox1.Text.Trim() != "")
             {
-                double sfiyat;//http://www.gorselprogramlama.com
+                double sfiyat;
                 sfiyat = double.Parse(textBox2.Text) + double.Parse(textBox2.Text) * (double.Parse(textBox3.Text) / 100);
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "UPDATE Stok SET Urun_Adi='" + comboBox1.Text + "',Adet='" + textBox1.Text + "',Birim_Fiyat='" + textBox2.Text + "',KDV='" + textBox3.Text + "',Satis_Fiyat='" + sfiyat + "' WHERE urunAdi='" + frm2.stokİşlemleri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "' ";
+                frm2.kmt.CommandText = "UPDATE Stok SET Urun_Adi='" + comboBox1.Text + "',Adet='" + textBox1.Text + "',Birim_Fiyat='" + textBox2.Text + "',KDV='" + textBox3.Text + "',Satis_Fiyat='" + sfiyat + "' WHERE Urun_Adi='" + frm2.stokİşlemleri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "' ";
                 frm2.kmt.ExecuteNonQuery();
                 frm2.kmt.Dispose();
                 frm2.bag.Close();
                 frm2.stokListele();
-                this.Close();//http://www.gorselprogramlama.com
+                this.Close();
             }
             else
             {
@@ -46,7 +46,7 @@ namespace SuperMarketÖdev
         }
         private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true; //combo1 de klavye tuşlarını kilitle.
+            e.Handled = true; 
         }
     }
 }

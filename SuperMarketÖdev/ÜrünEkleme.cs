@@ -57,12 +57,12 @@ namespace SuperMarketÖdev
                 if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "")
                 {
                     frm2.bag.Open();
-                    frm2.kmt.Connection = frm2.bag;//http://www.gorselprogramlama.com
+                    frm2.kmt.Connection = frm2.bag;
                     frm2.kmt.CommandText = "INSERT INTO Urun(Urun_Adi,Urun_Kodu,Firma_Adi,Alis_Fiyati,Satis_Fiyati,Kategori) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','" + comboBox1.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + comboBox2.Text + "') ";
-                    //kayıt ekleme sorgu metni
-                    frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
-                    frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-                    frm2.bag.Close(); //veritabanımızı kapatıyoruz
+                    
+                    frm2.kmt.ExecuteNonQuery();                                                    
+                    frm2.kmt.Dispose();
+                    frm2.bag.Close(); 
                     frm2.urunListele();
                     MessageBox.Show("Kayıt işlemi tamamlandı ! ");
                     for (int i = 0; i < this.Controls.Count; i++)

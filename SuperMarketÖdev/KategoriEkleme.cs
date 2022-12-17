@@ -31,7 +31,7 @@ namespace SuperMarketÖdev
             {
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dataGridView1.Columns[0].HeaderText = "Kategori Adı";
-            }//http://www.gorselprogramlama.com
+            }
             catch
             {
                 ;
@@ -45,14 +45,14 @@ namespace SuperMarketÖdev
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
                 frm2.kmt.CommandText = "INSERT INTO Kategori(Kategori_Adi) VALUES ('" + textBox1.Text + "') ";
-                //kayıt ekleme sorgu metni
-                frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
-                frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-                frm2.bag.Close(); //veritabanımızı kapatıyoruz
+                
+                frm2.kmt.ExecuteNonQuery();                                                  
+                frm2.kmt.Dispose();
+                frm2.bag.Close(); 
                 frm2.kategoriListele();
                 frm2.kategoriComboEkle();
                 MessageBox.Show("Kayıt işlemi tamamlandı ! ");
-                textBox1.Text = "";//http://www.gorselprogramlama.com
+                textBox1.Text = "";
             }
             else
             {
@@ -74,7 +74,7 @@ namespace SuperMarketÖdev
                     frm2.kmt.CommandText = "DELETE from Kategori WHERE Kategori_Adi='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "' ";
                     frm2.kmt.ExecuteNonQuery();
                     frm2.kmt.Dispose();
-                    frm2.bag.Close();//http://www.gorselprogramlama.com
+                    frm2.bag.Close();
                     frm2.kategoriListele();
                 }
             }

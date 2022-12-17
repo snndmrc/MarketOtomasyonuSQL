@@ -143,6 +143,12 @@
     <Compile Include="ÜrünEkleme.Designer.cs">
       <DependentUpon>ÜrünEkleme.cs</DependentUpon>
     </Compile>
+    <Compile Include="ÜrünEkleme2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÜrünEkleme2.Designer.cs">
+      <DependentUpon>ÜrünEkleme2.cs</DependentUpon>
+    </Compile>
     <Compile Include="ÜrünEkranı.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ÜrünEkleme.resx">
       <DependentUpon>ÜrünEkleme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÜrünEkleme2.resx">
+      <DependentUpon>ÜrünEkleme2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ÜrünEkranı.resx">
       <DependentUpon>ÜrünEkranı.cs</DependentUpon>

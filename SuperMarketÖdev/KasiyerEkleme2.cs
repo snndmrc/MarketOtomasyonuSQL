@@ -25,7 +25,7 @@ namespace SuperMarketÖdev
             {
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "UPDATE Kasiyer SET Kasiyer_Adi='" + textBox1.Text + "',Kasiyer_Soyadi='" + textBox2.Text + "',Kasiyer_TC='" + textBox3.Text + "',Kasiyer_Tel='" + textBox4.Text + "',Kasiyer_evTel='" + textBox5.Text + "',Kasiyer_Adress='" + textBox6.Text + "',Kasiyer_Maas='" + textBox7.Text + "',Kasiyer_KasaNo='" + textBox8.Text + "',Kasiyer_GorevBaslangici='" + dateTimePicker1.Text + "',Kasiyer_GorevBitimi='" + dateTimePicker2.Text + "' WHERE Kasiyer_TC='" + frm2.kasiyerİşlemleri.dataGridView1.CurrentRow.Cells[2].Value.ToString() + "' AND Kasiyer_Adi='" + frm2.kasiyerİşlemleri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
+                frm2.kmt.CommandText = "UPDATE Kasiyer SET Kasiyer_Adi='" + textBox1.Text + "',Kasiyer_Soyadi='" + textBox2.Text + "',Kasiyer_TC='" + textBox3.Text + "',Kasiyer_Tel='" + textBox4.Text + "',Kasiyer_EvTel='" + textBox5.Text + "',Kasiyer_Adress='" + textBox6.Text + "',Kasiyer_Maas='" + textBox7.Text + "',Kasiyer_KasaNo='" + textBox8.Text + "',Kasiyer_GorevBaslangici='" + dateTimePicker1.Text + "',Kasiyer_GorevBitimi='" + dateTimePicker2.Text + "' WHERE Kasiyer_TC='" + frm2.kasiyerİşlemleri.dataGridView1.CurrentRow.Cells[2].Value.ToString() + "' AND Kasiyer_Adi='" + frm2.kasiyerİşlemleri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
                 //güncelleme sorgusu
                 frm2.kmt.ExecuteNonQuery();
                 frm2.kmt.Dispose();
@@ -33,9 +33,9 @@ namespace SuperMarketÖdev
                 frm2.kasiyerListele();
                 this.Close();
             }
-            else//http://www.gorselprogramlama.com
+            else
             {
-                MessageBox.Show("Lütfen Ad-Soyad-Tckimlik alanlarını boş bırakmayınız !!!");
+                MessageBox.Show("Lütfen Ad-Soyad-TCKimlik alanlarını boş bırakmayınız !!!");
             }
 
         }

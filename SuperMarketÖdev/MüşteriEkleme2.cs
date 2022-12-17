@@ -29,11 +29,9 @@ namespace SuperMarketÖdev
             {
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "UPDATE Musteri SET Musteri_Adi='" + textBox1.Text + "',Musteri_Soyadi='" + textBox2.Text + "',Musteri_TC='" + textBox3.Text + "',Musteri_CepTel='" + textBox4.Text + "',Musteri_EvTel='" + textBox5.Text + "',Musteri_Adres='" + textBox6.Text + "' WHERE Musteri_TC='" + frm2.müşteriBilgileri.dataGridView1.CurrentRow.Cells[2].Value.ToString() + "' AND Musteri_Adi='" + frm2.müşteriBilgileri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
-                //belirtilen şarta uyan kaydı textlere girilen değerlerle güncelle
+                frm2.kmt.CommandText = "UPDATE Musteri SET Musteri_Adi='" + textBox1.Text + "',Musteri_Soyadi='" + textBox2.Text + "',Musteri_TC='" + textBox3.Text + "',Musteri_CepTel='" + textBox6.Text + "',Musteri_EvTel='" + textBox5.Text + "',Musteri_Adres='" + textBox4.Text + "' WHERE Musteri_TC='" + frm2.müşteriBilgileri.dataGridView1.CurrentRow.Cells[2].Value.ToString() + "' AND Musteri_Adi='" + frm2.müşteriBilgileri.dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";               
                 frm2.kmt.ExecuteNonQuery();
-                frm2.kmt.Dispose();//http://www.gorselprogramlama.com
-                frm2.bag.Close();
+                frm2.kmt.Dispose();
                 frm2.musteriListele();
                 this.Close();
             }

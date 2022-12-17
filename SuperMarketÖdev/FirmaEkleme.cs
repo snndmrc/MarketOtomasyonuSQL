@@ -34,7 +34,7 @@ namespace SuperMarketÖdev
                 dataGridView1.Columns[1].HeaderText = "Firma Adresi";
             }
             catch
-            {//http://www.gorselprogramlama.com
+            {
                 ;
             }
         }
@@ -46,14 +46,14 @@ namespace SuperMarketÖdev
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
                 frm2.kmt.CommandText = "INSERT INTO Firma(FirmaAdi,FirmaAdresi) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "') ";
-                //kayıt ekleme sorgu metni
-                frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
-                frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-                frm2.bag.Close(); //veritabanımızı kapatıyoruz
+                
+                frm2.kmt.ExecuteNonQuery();                                                   
+                frm2.kmt.Dispose();
+                frm2.bag.Close(); 
                 frm2.firmaListele();
                 frm2.firmaComboEkle();
                 MessageBox.Show("Kayıt işlemi tamamlandı ! ");
-                textBox1.Text = "";//http://www.gorselprogramlama.com
+                textBox1.Text = "";
                 textBox2.Text = "";
             }
             else
@@ -82,7 +82,7 @@ namespace SuperMarketÖdev
                 if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
                 {
                     frm2.bag.Open();
-                    frm2.kmt.Connection = frm2.bag;//http://www.gorselprogramlama.com
+                    frm2.kmt.Connection = frm2.bag;
                     frm2.kmt.CommandText = "DELETE from Firma WHERE FirmaAdi='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "' ";
                     frm2.kmt.ExecuteNonQuery();
                     frm2.kmt.Dispose();
@@ -94,7 +94,7 @@ namespace SuperMarketÖdev
             {
                 MessageBox.Show(hata.Message);
             }
-        }//http://www.gorselprogramlama.com
+        }
     }
     
 }

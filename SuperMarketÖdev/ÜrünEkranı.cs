@@ -33,14 +33,14 @@ namespace SuperMarketÖdev
             else if (comboBox1.Text == "Firma Adı") alan = "Firma_Adi";
             else if (comboBox1.Text == "Alış Fiyatı") alan = "Alis_Fiyati";
             else if (comboBox1.Text == "Satış Fiyatı") alan = "Satis_Fiyati";
-            else if (comboBox1.Text == "Kategori") alan = "Kategori";//http://www.gorselprogramlama.com
+            else if (comboBox1.Text == "Kategori") alan = "Kategori";
 
-            if (comboBox1.Text == "Tümü")//eğer texbox boş ise
+            if (comboBox1.Text == "Tümü")
             {
                 frm2.bag.Open();
                 frm2.tabloUrun.Clear();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "Select Urun_Adi,Urun_Kodu,Firma_Adi,Alis_Fiyati,Satis_Fiyati,Kategori From Urun";//tüm kayıtları seç
+                frm2.kmt.CommandText = "Select Urun_Adi,Urun_Kodu,Firma_Adi,Alis_Fiyati,Satis_Fiyati,Kategori From Urun";
                 adtr.SelectCommand = frm2.kmt;
                 adtr.Fill(frm2.tabloUrun);
                 frm2.bag.Close();
@@ -50,7 +50,7 @@ namespace SuperMarketÖdev
                 frm2.bag.Open();
                 adtr.SelectCommand.CommandText = " " + " where(" + alan + " like '%" + textBox1.Text + "%' )";
                 frm2.tabloUrun.Clear();
-                adtr.Fill(frm2.tabloUrun);//http://www.gorselprogramlama.com
+                adtr.Fill(frm2.tabloUrun);
                 frm2.bag.Close();
             }
         }
@@ -64,7 +64,7 @@ namespace SuperMarketÖdev
         {
             
                 frm2.urunListele();
-                try//http://www.gorselprogramlama.com
+                try
                 {
                     dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     dataGridView1.Columns[0].HeaderText = "Ürün Adı";
@@ -90,9 +90,8 @@ namespace SuperMarketÖdev
                 if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
                 {
                     frm2.bag.Open();
-                    frm2.kmt.Connection = frm2.bag;//http://www.gorselprogramlama.com
-                    frm2.kmt.CommandText = "DELETE from Urun WHERE Urun_Kodu='" + dataGridView1.CurrentRow.Cells[1].Value.ToString() + "'";
-                    //şarta uyan kaydı silme sorgusu
+                    frm2.kmt.Connection = frm2.bag;
+                    frm2.kmt.CommandText = "DELETE from Urun WHERE Urun_Kodu='" + dataGridView1.CurrentRow.Cells[1].Value.ToString() + "'";                  
                     frm2.kmt.ExecuteNonQuery();
                     frm2.kmt.Dispose();
                     frm2.bag.Close();
@@ -112,14 +111,19 @@ namespace SuperMarketÖdev
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frm2.ürünekleme.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            //form7 deki textbox1 in textine datagridview1 deki seçili satırın 0. hücresindeki değeri yaz.
-            frm2.ürünekleme.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            frm2.ürünekleme.comboBox1.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            frm2.ürünekleme.textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();//http://www.gorselprogramlama.com
-            frm2.ürünekleme.textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-            frm2.ürünekleme.comboBox2.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
-            frm2.ürünekleme.ShowDialog();
+
+        }
+
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            frm2.ÜrünEkleme2.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            frm2.ÜrünEkleme2.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            frm2.ÜrünEkleme2.comboBox1.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            frm2.ÜrünEkleme2.textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            frm2.ÜrünEkleme2.textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            frm2.ÜrünEkleme2.comboBox2.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            frm2.ÜrünEkleme2.ShowDialog();
         }
     }
 }

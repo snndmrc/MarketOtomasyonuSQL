@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace SuperMarketÖdev
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try//http://www.gorselprogramlama.com
+            try
             {
                 DialogResult cevap;
                 cevap = MessageBox.Show("Kaydı silmek istediğinizden eminmisiniz", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -93,16 +94,50 @@ namespace SuperMarketÖdev
                 MessageBox.Show("Lütfen boş alan bırakmayınız !!!");
             }
         }
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+       
+
+        private void dataGridView1_CellMouseDoubleClick_1(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //http://www.gorselprogramlama.com
-            frm2.yeniStokEkleme2.comboBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            //form15 deki combo1 in textine datagridview1 deki seçili satırın 0. hücresindeki değeri yaz.
+            frm2.yeniStokEkleme2.comboBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();        
             frm2.yeniStokEkleme2.textBox1.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             frm2.yeniStokEkleme2.textBox2.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
             frm2.yeniStokEkleme2.textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
             frm2.yeniStokEkleme2.ShowDialog();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlDataAdapter adtr = new SqlDataAdapter("select Urun_Adi,Adet,Birim_Fiyat,KDV,Satis_Fiyat From Stok", frm2.bag);
+            string alan = "";
+            if (comboBox1.Text == "Ürün Adı") alan = "Urun_Adi";
+            else if (comboBox1.Text == "Adet") alan = "Adet";
+            else if (comboBox1.Text == "Birim Fiyat") alan = "Birim_Fiyat";
+            else if (comboBox1.Text == "Kdv") alan = "KDV";
+            else if (comboBox1.Text == "Satış Fiyatı") alan = "Satis_Fiyat";
+
+            if (comboBox1.Text == "Tümü")
+            {
+                frm2.bag.Open();
+                frm2.tabloStok.Clear();
+                frm2.kmt.Connection = frm2.bag;
+                frm2.kmt.CommandText = "Select Urun_Adi,Adet,Birim_Fiyat,KDV,Satis_Fiyat from Stok";//tüm kayıtları seç
+                adtr.SelectCommand = frm2.kmt;
+                adtr.Fill(frm2.tabloStok);
+                frm2.bag.Close();
+            }
+            if (alan != "")
+            {
+                frm2.bag.Open();
+                adtr.SelectCommand.CommandText = " Select Urun_Adi,Adet,Birim_Fiyat,KDV,Satis_Fiyat From Stok" + " where(" + alan + " like '%" + textBox1.Text + "%' )";
+                frm2.tabloStok.Clear();
+                adtr.Fill(frm2.tabloStok);
+                frm2.bag.Close();
+            }
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            textBox2.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
         }
     }
 }

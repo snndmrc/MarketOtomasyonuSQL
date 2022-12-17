@@ -34,7 +34,7 @@ namespace SuperMarketÖdev
                 dataGridView1.Columns[0].HeaderText = "Müşteri Adı";
                 dataGridView1.Columns[1].HeaderText = "Müşteri Soyadı";
                 dataGridView1.Columns[2].HeaderText = "Tc Kimlik";
-                dataGridView1.Columns[3].HeaderText = "Cep Tel";//http://www.gorselprogramlama.com
+                dataGridView1.Columns[3].HeaderText = "Cep Tel";
                 dataGridView1.Columns[4].HeaderText = "Ev Tel";
                 dataGridView1.Columns[5].HeaderText = "Adres";
             }
@@ -77,49 +77,64 @@ namespace SuperMarketÖdev
         {
             SqlDataAdapter adtr = new SqlDataAdapter("select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres From Musteri", frm2.bag);
             string alan = "";
-            if (comboBox1.Text == "Müşteri Adı") alan = "Musteri_Adi";
-            //eğer combo1 in metni  Müşteri Adı ise alan değişkine musteriAdi a eşitle yani combo1 de Müşteri Adı seçeneği seçiliyse
+            if (comboBox1.Text == "Müşteri Adı") alan = "Musteri_Adi";           
             else if (comboBox1.Text == "Müşteri Soyadı") alan = "Musteri_Soyadi";
             else if (comboBox1.Text == "Tc Kimlik") alan = "Musteri_TC";
-            else if (comboBox1.Text == "Cep Tel") alan = "Musteri_CepTe";//http://www.gorselprogramlama.com
+            else if (comboBox1.Text == "Cep Tel") alan = "Musteri_CepTe";
             else if (comboBox1.Text == "Ev Tel") alan = "Musteri_EvTel";
             else if (comboBox1.Text == "Adres") alan = "Musteri_Adres";
 
-            if (comboBox1.Text == "Tümü")//eğer texbox boş ise
+            if (comboBox1.Text == "Tümü")
             {
                 frm2.bag.Open();
                 frm2.tabloMusteri.Clear();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "Select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres from Musteri";//tüm kayıtları seç
+                frm2.kmt.CommandText = "Select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres from Musteri";
                 adtr.SelectCommand = frm2.kmt;
                 adtr.Fill(frm2.tabloMusteri);
                 frm2.bag.Close();
-            }//http://www.gorselprogramlama.com
+            }
             if (alan != "")
             {
                 frm2.bag.Open();
                 adtr.SelectCommand.CommandText = " Select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres From Musteri" + " where(" + alan + " like '%" + textBox1.Text + "%' )";
-                // textbox1 e girilen değerin belitilen alan içinde geçenleri seç
+               
                 frm2.tabloMusteri.Clear();
-                adtr.Fill(frm2.tabloMusteri);//tabloMusteri sanal tablosunu adaptör ile doldur.
+                adtr.Fill(frm2.tabloMusteri);
                 frm2.bag.Close();
             }
         }
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            frm2.müşteriEkleme2.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            //form4 deki textbox1 in textine datagridview1 deki seçili satırın 0. hücresindeki değeri yaz.
-            frm2.müşteriEkleme2.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            frm2.müşteriEkleme2.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();//http://www.gorselprogramlama.com
-            frm2.müşteriEkleme2.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            frm2.müşteriEkleme2.textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-            frm2.müşteriEkleme2.textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
-            frm2.müşteriEkleme2.ShowDialog();
-        }
+        
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void MüşteriBilgileri_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellMouseDoubleClick_1(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            frm2.müşteriEkleme2.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            frm2.müşteriEkleme2.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            frm2.müşteriEkleme2.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            frm2.müşteriEkleme2.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            frm2.müşteriEkleme2.textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            frm2.müşteriEkleme2.textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            frm2.müşteriEkleme2.ShowDialog();
         }
     }
 }

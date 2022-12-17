@@ -17,6 +17,7 @@ namespace SuperMarketÖdev
 {
     public partial class Form2 : Form
     {
+        public ÜrünEkleme2 ÜrünEkleme2;
          public KasiyerEkleme2 kasiyerEkleme2;
          public MüşteriEkleme2 müşteriEkleme2;
          public ÜrünEkranı ürünEkranı;
@@ -30,7 +31,7 @@ namespace SuperMarketÖdev
          public FirmaEkleme firmaEkleme;
          public Stokİşlemleri stokİşlemleri;
          public YeniStokEkleme yeniStokEkleme;
-        public YeniStokEkleme2 yeniStokEkleme2;
+         public YeniStokEkleme2 yeniStokEkleme2;
         
 
       
@@ -40,6 +41,7 @@ namespace SuperMarketÖdev
         {
             InitializeComponent();
 
+            ÜrünEkleme2 = new ÜrünEkleme2();
             yeniStokEkleme2 = new YeniStokEkleme2();
             kasiyerEkleme2= new KasiyerEkleme2();
             müşteriEkleme2 = new MüşteriEkleme2();
@@ -55,6 +57,7 @@ namespace SuperMarketÖdev
             stokİşlemleri = new Stokİşlemleri();
             yeniStokEkleme = new YeniStokEkleme();
 
+            ÜrünEkleme2.frm2 = this;
             yeniStokEkleme2.frm2 = this;
             kasiyerEkleme2.frm2 = this;
             müşteriEkleme2.frm2 = this;
@@ -74,22 +77,22 @@ namespace SuperMarketÖdev
 
         }
         public SqlConnection bag = new SqlConnection(@"Data Source=MSIBRAVO\SQLEXPRESS01;Initial Catalog=Tablo;Integrated Security=True");
-        //bağlantı değişkeni tanımlanıyor//
-        public DataTable tabloMusteri = new DataTable();//sanal tablo değişkeni tanımlanıyor       
-        public DataTable tabloUrun = new DataTable();//sanal tablo değişkeni tanımlanıyor       
-        public DataTable tabloKategori = new DataTable();//sanal tablo değişkeni tanımlanıyor  
-        public DataTable tabloFirma = new DataTable();//sanal tablo değişkeni tanımlanıyor  
-        public DataTable tabloKasiyer = new DataTable();//sanal tablo değişkeni tanımlanıyor
-        public DataTable tabloStok = new DataTable();//sanal tablo değişkeni tanımlanıyor
-        public DataTable tabloSatis = new DataTable();//sanal tablo değişkeni tanımlanıyor
-        public SqlCommand kmt = new SqlCommand();//sql komut kullanımı değişkeni tanımlanıyor.
+       
+        public DataTable tabloMusteri = new DataTable();     
+        public DataTable tabloUrun = new DataTable();     
+        public DataTable tabloKategori = new DataTable();  
+        public DataTable tabloFirma = new DataTable(); 
+        public DataTable tabloKasiyer = new DataTable();
+        public DataTable tabloStok = new DataTable();
+        public DataTable tabloSatis = new DataTable();
+        public SqlCommand kmt = new SqlCommand();
 
         public bool durum;
         public void gununSatisListele()
         {
             tabloSatis.Clear();
             bag.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih from Satis Where Tarih = '" + dateTimePicker1 + "'", bag);
+            SqlDataAdapter adtr = new SqlDataAdapter("select Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih from Satis Where Tarih = '" + dateTimePicker1.Text + "'", bag);
             //tarih alanı dateTimePicker1 seçili tarih olan kayıtları seç
             adtr.Fill(tabloSatis);// tabloSatis sanal tablosunu adaptördeki veri ile doldur.
             dataGridView1.DataSource = tabloSatis;//dataGridView1'in veri kaynağı tabloSatis
@@ -101,23 +104,21 @@ namespace SuperMarketÖdev
             byte TcKimlik;
             bag.Open();
             kmt.Connection = bag;
-            kmt.CommandText = "Select Count (Kasiyer_TC) from Kasiyer Where Kasiyer_TC='" + kasiyerEkleme.textBox4.Text  + "'";
-            //kimlik alanı form10 daki textbox3'ın textine eşit olan kayıtları say
+            kmt.CommandText = "Select Count (Kasiyer_TC) from Kasiyer Where Kasiyer_TC='" + kasiyerEkleme.textBox3.Text  + "'";
             TcKimlik = byte.Parse(kmt.ExecuteScalar().ToString());
-            //sorguyu sayılarla ifade ederek yürüt ve sayıya çevir.
-            if (TcKimlik > 0) durum = true;//eğer sayTcKimlik büyük 0 ise yani böyle bir kayıt varsa
+            if (TcKimlik > 0) durum = true;
             bag.Close();
         }
 
         public void tcKimlikKontrol()
         {
             durum = false;
-            byte sayTcKimilk;
+            byte sayTcKimlik;
             bag.Open();
             kmt.Connection = bag;
             kmt.CommandText = "Select Count (Musteri_TC) from Musteri Where Musteri_TC='" + müşteriEkleme.textBox3.Text + "'";
-            sayTcKimilk = byte.Parse(kmt.ExecuteScalar().ToString());
-            if (sayTcKimilk > 0) durum = true;
+            sayTcKimlik = byte.Parse(kmt.ExecuteScalar().ToString());
+            if (sayTcKimlik > 0) durum = true;
             bag.Close();//http://www.gorselprogramlama.com
         }
         public void urunKontrol()
@@ -157,7 +158,6 @@ namespace SuperMarketÖdev
             tabloUrun.Clear();
             bag.Open();
             SqlDataAdapter adtr = new SqlDataAdapter("select Urun_Adi,Urun_Kodu,Firma_Adi,Alis_Fiyati,Satis_Fiyati,Kategori from Urun", bag);
-            //urunbil tablosudaki belirtilen alanları seç
             adtr.Fill(tabloUrun);
             ürünEkranı.dataGridView1.DataSource = tabloUrun;
             bag.Close();
@@ -184,7 +184,7 @@ namespace SuperMarketÖdev
         {
             tabloKasiyer.Clear();
             bag.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select Kasiyer_Adi,Kasiyer_Soyadi,Kasiyer_TC,Kasiyer_Tel,Kasiyer_Adres,Kasiyer_Maas,Kasiyer_KasaNo,Kasiyer_GorevBaslangici,Kasiyer_GorevBitimi from Kasiyer", bag);
+            SqlDataAdapter adtr = new SqlDataAdapter("select Kasiyer_Adi,Kasiyer_Soyadi,Kasiyer_TC,Kasiyer_Tel,Kasiyer_evTel,Kasiyer_Adres,Kasiyer_Maas,Kasiyer_KasaNo,Kasiyer_GorevBaslangici,Kasiyer_GorevBitimi from Kasiyer", bag);
             adtr.Fill(tabloKasiyer);
             kasiyerİşlemleri.dataGridView1.DataSource = tabloKasiyer;
             bag.Close();
@@ -198,31 +198,30 @@ namespace SuperMarketÖdev
             stokİşlemleri.dataGridView1.DataSource = tabloStok;
             bag.Close();
         }
-        public void urunComboEkle()//girilen kayıtların otomatik olarak combolarda gözükmesini sağlıyor.
+        public void urunComboEkle()
         {
-            yeniStokEkleme.comboBox1.Items.Clear(); //frm15.comboBox1.Items.Clear();
+            yeniStokEkleme.comboBox1.Items.Clear(); 
+            yeniStokEkleme2.comboBox1.Items.Clear();
             bag.Open();
             kmt.Connection = bag;
-            kmt.CommandText = "Select Urun_Adi from Urun";//http://www.gorselprogramlama.com
-            //urunbil tablosundaki urunAdi alanınındaki kayıtları seç
+            kmt.CommandText = "Select Urun_Adi from Urun";
+            
             SqlDataReader oku;
-            oku = kmt.ExecuteReader();//soruyu yürüt ve oku .
-            while (oku.Read())//okunacak kayıt var olduğu sürece
+            oku = kmt.ExecuteReader();
+            while (oku.Read())
             {
                 if (yeniStokEkleme.comboBox1.Items.IndexOf(oku[0].ToString()) == -1 && oku[0].ToString().Trim() != "") yeniStokEkleme.comboBox1.Items.Add(oku[0].ToString());
-                //eğer oku[0] içindeki değer fprm13 deki combo1 de yok ise ve ku[0] içindeki değer boş değilse form13 deki comboya oku[0] değerini aktar.
-               // if (frm15.comboBox1.Items.IndexOf(oku[0].ToString()) == -1 && oku[0].ToString().Trim() != "") frm15.comboBox1.Items.Add(oku[0].ToString());
+                if (yeniStokEkleme2.comboBox1.Items.IndexOf(oku[0].ToString()) == -1 && oku[0].ToString().Trim() != "") yeniStokEkleme2.comboBox1.Items.Add(oku[0].ToString());
             }
             bag.Close();
             oku.Dispose();
         }
-        public void urunSatisComboEkle()//girilen kayıtların otomatik olarak combolarda gözükmesini sağlıyor.
+        public void urunSatisComboEkle()
         {
             satisIslemleri.comboBox2.Items.Clear();//http://www.gorselprogramlama.com
             bag.Open();
             kmt.Connection = bag;
-            kmt.CommandText = "Select Urun_Adi from Stok Where Adet>0";
-            //urunbil tablosundaki adet değeri sıfırdan büyük olan urunAdi alanınındaki kayıtları seç
+            kmt.CommandText = "Select Urun_Adi from Stok Where Adet>0";          
             SqlDataReader oku;
             oku = kmt.ExecuteReader();
             while (oku.Read())
@@ -233,11 +232,11 @@ namespace SuperMarketÖdev
             bag.Close();
             oku.Dispose();
         }
-        public void urunSatisFiyatTextEkle()//girilen kayıtların otomatik olarak combolarda gözükmesini sağlıyor.
+        public void urunSatisFiyatTextEkle()
         {
 
             bag.Open();
-            kmt.Connection = bag;//http://www.gorselprogramlama.com
+            kmt.Connection = bag;
             kmt.CommandText = "Select Urun_Adi,Satis_Fiyat from Stok";
             SqlDataReader oku;
             oku = kmt.ExecuteReader();
@@ -249,7 +248,7 @@ namespace SuperMarketÖdev
             bag.Close();
             oku.Dispose();
         }
-        public void firmaComboEkle()//girilen kayıtların otomatik olarak combolarda gözükmesini sağlıyor.
+        public void firmaComboEkle()
         {
             ürünekleme.comboBox1.Items.Clear();
             bag.Open();
@@ -264,7 +263,7 @@ namespace SuperMarketÖdev
             bag.Close();
             oku.Dispose();
         }
-        public void kategoriComboEkle()//girilen kayıtların otomatik olarak combolarda gözükmesini sağlıyor.
+        public void kategoriComboEkle()
         {
             ürünekleme.comboBox2.Items.Clear();
             bag.Open();
@@ -336,10 +335,8 @@ namespace SuperMarketÖdev
             gununSatisListele();
             try
             {
-                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                //datagridview1 seçme modunu satırı komple satır seç olarak ayarla               
-                dataGridView1.Columns[0].HeaderText = "Fatura No";
-                //datagridview1 in 0. sütun başlık metni Fatura No olsun
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;                             
+                dataGridView1.Columns[0].HeaderText = "Fatura No";           
                 dataGridView1.Columns[1].HeaderText = "Müşteri Adı";
                 dataGridView1.Columns[2].HeaderText = "Müşteri Soyadı";
                 dataGridView1.Columns[3].HeaderText = "Tc Kimlik";

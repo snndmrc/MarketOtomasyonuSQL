@@ -37,20 +37,20 @@ namespace SuperMarketÖdev
             if (frm2.durum == false)
             {
                 if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "" && textBox3.Text.Trim() != "")
-                //eğer textbox1,textbox2,textbox3 boş değilse
+                
                 {
-                    frm2.bag.Open();//form1deki bag isimli bağlantıyı aç
-                    frm2.kmt.Connection = frm2.bag;//form1deki kmt nin bağlantısı form1 deki bag dır.
+                    frm2.bag.Open();
+                    frm2.kmt.Connection = frm2.bag;
                     frm2.kmt.CommandText = "INSERT INTO Kasiyer(Kasiyer_Adi,Kasiyer_Soyadi,Kasiyer_TC,Kasiyer_Tel,Kasiyer_evTel,Kasiyer_Adres,Kasiyer_Maas,Kasiyer_KasaNo,Kasiyer_GorevBaslangici,Kasiyer_GorevBitimi) VALUES ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + dateTimePicker1.Text + "','" + dateTimePicker2.Text + "') ";
-                    //kayıt ekleme sorgusu
-                    frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                                                      
-                    frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-                    frm2.bag.Close(); //veritabanımızı kapatıyoruz
-                    frm2.kasiyerListele();//http://www.gorselprogramlama.com
+                    
+                    frm2.kmt.ExecuteNonQuery();                                                   
+                    frm2.kmt.Dispose();
+                    frm2.bag.Close(); 
+                    frm2.kasiyerListele();
                     MessageBox.Show("Kayıt işlemi tamamlandı ! ");
                     for (int i = 0; i < this.Controls.Count; i++)
                     {
-                        if (this.Controls[i] is TextBox) this.Controls[i].Text = "";// formdaki tüm textboxların içini boşalt.
+                        if (this.Controls[i] is TextBox) this.Controls[i].Text = "";
                     }
                 }
                 else

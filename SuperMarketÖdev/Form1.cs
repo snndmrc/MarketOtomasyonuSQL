@@ -42,7 +42,7 @@ namespace SuperMarketÖdev
             com = new SqlCommand();
             con.Open();
             com.Connection= con;
-            com.CommandText = "Select *From giris where Kullanici_Adi='" + textBox1.Text 
+            com.CommandText = "Select *From Loginn where Kullanici_Adi='" + textBox1.Text 
                 + "'And Sifre ='" + textBox2.Text + "'";
             dr = com.ExecuteReader();
             if (dr.Read())

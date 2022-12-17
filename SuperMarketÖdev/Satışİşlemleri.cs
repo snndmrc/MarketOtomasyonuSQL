@@ -33,12 +33,12 @@ namespace SuperMarketÖdev
             {
                 if (int.Parse(textBox7.Text) <= int.Parse(oku[0].ToString())) durum = true;
             }
-            frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-            frm2.bag.Close(); //veritabanımızı kapatıyoruz  
+            frm2.kmt.Dispose();
+            frm2.bag.Close();
         }
         private void SatisIslemleri_Load(object sender, EventArgs e)
         {
-            frm2.musteriListele();//http://www.gorselprogramlama.com
+            frm2.musteriListele();
             frm2.urunSatisComboEkle();
             try
             {
@@ -67,14 +67,14 @@ namespace SuperMarketÖdev
                 else if (comboBox1.Text == "Tc Kimlik") alan = "Musteri_TC";
                 else if (comboBox1.Text == "Cep Tel") alan = "Musteri_CepTel";
                 else if (comboBox1.Text == "Ev Tel") alan = "Musteri_EvTel";
-                else if (comboBox1.Text == "Adres") alan = "Musteri_Adres";//http://www.gorselprogramlama.com
+                else if (comboBox1.Text == "Adres") alan = "Musteri_Adres";
 
                 if (comboBox1.Text == "Tümü")//eğer texbox boş ise
                 {
                     frm2.bag.Open();
                     frm2.tabloMusteri.Clear();
                     frm2.kmt.Connection = frm2.bag;
-                    frm2.kmt.CommandText = "Select musteriAdi,musteriSoyadi,tcKimlik,cepTel,evTel,adres from musteribil";//tüm kayıtları seç
+                    frm2.kmt.CommandText = "Select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres from Musteri";
                     adtr.SelectCommand = frm2.kmt;
                     adtr.Fill(frm2.tabloMusteri);
                     frm2.bag.Close();
@@ -85,17 +85,11 @@ namespace SuperMarketÖdev
                     adtr.SelectCommand.CommandText = " Select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres From Musteri" + " where(" + alan + " like '%" + textBox1.Text + "%' )";
                     frm2.tabloMusteri.Clear();
                     adtr.Fill(frm2.tabloMusteri);
-                    frm2.bag.Close();//http://www.gorselprogramlama.com
+                    frm2.bag.Close();
                 }
             }
         }
-        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            textBox5.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-        }
-
+      
         private void button2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text.Trim() != "" && textBox3.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox7.Text.Trim() != "" && textBox6.Text.Trim() != "")
@@ -107,13 +101,12 @@ namespace SuperMarketÖdev
                     adet = int.Parse(textBox7.Text);
                     frm2.bag.Open();//http://www.gorselprogramlama.com
                     frm2.kmt.Connection = frm2.bag;
-                    frm2.kmt.CommandText = "INSERT INTO satisbil(faturaNo,musteriAdi,musteriSoyadi,tcKimlik,urunAdi,satisFiyat,adet,toplamTutar,kasaNo,tarih) VALUES ('" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + comboBox2.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox9.Text + "','" + dateTimePicker1.Text + "') ";
-                    //kayıt ekleme sordu metni
-                    frm2.kmt.ExecuteNonQuery();//sorguyu çalıştır                    
-                    frm2.kmt.CommandText = "UPDATE stokbil SET adet=adet-'" + adet + "' WHERE urunAdi='" + comboBox2.Text + "' ";
+                    frm2.kmt.CommandText = "INSERT INTO Satis(Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih) VALUES ('" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + comboBox2.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox9.Text + "','" + dateTimePicker1.Text + "') ";         
+                    frm2.kmt.ExecuteNonQuery();                  
+                    frm2.kmt.CommandText = "UPDATE Stok SET Adet=Adet-'" + adet + "' WHERE Urun_Adi='" + comboBox2.Text + "' ";
                     frm2.kmt.ExecuteNonQuery();
-                    frm2.kmt.Dispose();//Komut kullanımını kapatıyoruz
-                    frm2.bag.Close(); //veritabanımızı kapatıyoruz  
+                    frm2.kmt.Dispose();
+                    frm2.bag.Close();  
                     frm2.gununSatisListele();
                     frm2.urunSatisComboEkle();
                     MessageBox.Show("Kayıt işlemi tamamlandı ! ");
@@ -130,10 +123,7 @@ namespace SuperMarketÖdev
                 MessageBox.Show("Lütfen gerekli alanları doldurunuz !!!");
             }
         }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            frm2.urunSatisFiyatTextEkle();
-        }
+       
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -148,12 +138,29 @@ namespace SuperMarketÖdev
             }
             catch
             {
-                ;//http://www.gorselprogramlama.com
+                ;   
             }
         }
         private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
-        }//http://www.gorselprogramlama.com
+        }
+
+        private void comboBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            frm2.urunSatisFiyatTextEkle();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+        }
     }
 }
