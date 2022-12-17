@@ -53,13 +53,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.label1.Font = new System.Drawing.Font("Arial Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Stencil", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(239, 38);
+            this.label1.Location = new System.Drawing.Point(343, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(288, 40);
+            this.label1.Size = new System.Drawing.Size(125, 56);
             this.label1.TabIndex = 2;
-            this.label1.Text = "DAS Supermarket";
+            this.label1.Text = "DAS ";
             // 
             // textBox1
             // 
@@ -201,7 +201,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(805, 452);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
