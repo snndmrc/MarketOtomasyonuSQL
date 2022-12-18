@@ -92,10 +92,9 @@ namespace SuperMarketÖdev
         {
             tabloSatis.Clear();
             bag.Open();
-            SqlDataAdapter adtr = new SqlDataAdapter("select Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih from Satis Where Tarih = '" + dateTimePicker1.Text + "'", bag);
-            //tarih alanı dateTimePicker1 seçili tarih olan kayıtları seç
-            adtr.Fill(tabloSatis);// tabloSatis sanal tablosunu adaptördeki veri ile doldur.
-            dataGridView1.DataSource = tabloSatis;//dataGridView1'in veri kaynağı tabloSatis
+            SqlDataAdapter adtr = new SqlDataAdapter("select Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih from Satis Where Tarih = '" + dateTimePicker1.Text + "'", bag);          
+            adtr.Fill(tabloSatis);
+            dataGridView1.DataSource = tabloSatis;
             bag.Close();
         }
         public void tcKimlikKasiyerKontrol()
@@ -119,7 +118,7 @@ namespace SuperMarketÖdev
             kmt.CommandText = "Select Count (Musteri_TC) from Musteri Where Musteri_TC='" + müşteriEkleme.textBox3.Text + "'";
             sayTcKimlik = byte.Parse(kmt.ExecuteScalar().ToString());
             if (sayTcKimlik > 0) durum = true;
-            bag.Close();//http://www.gorselprogramlama.com
+            bag.Close();
         }
         public void urunKontrol()
         {
@@ -128,7 +127,7 @@ namespace SuperMarketÖdev
             bag.Open();
             kmt.Connection = bag;
             kmt.CommandText = "Select Count (Urun_Adi) from Stok Where Urun_Adi='" + yeniStokEkleme.comboBox1.Text + "'";
-            sayUrun = byte.Parse(kmt.ExecuteScalar().ToString());//http://www.gorselprogramlama.com
+            sayUrun = byte.Parse(kmt.ExecuteScalar().ToString());
             if (sayUrun > 0) durum = true;
             bag.Close();
         }
@@ -149,7 +148,7 @@ namespace SuperMarketÖdev
             bag.Open();
             SqlDataAdapter adtr = new SqlDataAdapter("select Musteri_Adi,Musteri_Soyadi,Musteri_TC,Musteri_CepTel,Musteri_EvTel,Musteri_Adres from Musteri", bag);
             adtr.Fill(tabloMusteri);
-            müşteriBilgileri.dataGridView1.DataSource = tabloMusteri;//http://www.gorselprogramlama.com
+            müşteriBilgileri.dataGridView1.DataSource = tabloMusteri;
             satisIslemleri.dataGridView1.DataSource = tabloMusteri;
             bag.Close();
         }
@@ -164,7 +163,7 @@ namespace SuperMarketÖdev
         }
         public void kategoriListele()
         {
-            tabloKategori.Clear();//http://www.gorselprogramlama.com
+            tabloKategori.Clear();
             bag.Open();
             SqlDataAdapter adtr = new SqlDataAdapter("select Kategori_Adi from Kategori", bag);
             adtr.Fill(tabloKategori);
@@ -189,7 +188,7 @@ namespace SuperMarketÖdev
             kasiyerİşlemleri.dataGridView1.DataSource = tabloKasiyer;
             bag.Close();
         }
-        public void stokListele()//http://www.gorselprogramlama.com
+        public void stokListele()
         {
             tabloStok.Clear();
             bag.Open();
@@ -218,7 +217,7 @@ namespace SuperMarketÖdev
         }
         public void urunSatisComboEkle()
         {
-            satisIslemleri.comboBox2.Items.Clear();//http://www.gorselprogramlama.com
+            satisIslemleri.comboBox2.Items.Clear();
             bag.Open();
             kmt.Connection = bag;
             kmt.CommandText = "Select Urun_Adi from Stok Where Adet>0";          
@@ -255,7 +254,7 @@ namespace SuperMarketÖdev
             kmt.Connection = bag;
             kmt.CommandText = "Select FirmaAdi from Firma";
             SqlDataReader oku;
-            oku = kmt.ExecuteReader();//http://www.gorselprogramlama.com
+            oku = kmt.ExecuteReader();
             while (oku.Read())
             {
                 if (ürünekleme.comboBox1.Items.IndexOf(oku[0].ToString()) == -1 && oku[0].ToString().Trim() != "") ürünekleme.comboBox1.Items.Add(oku[0].ToString());

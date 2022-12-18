@@ -69,7 +69,7 @@ namespace SuperMarketÖdev
                 else if (comboBox1.Text == "Ev Tel") alan = "Musteri_EvTel";
                 else if (comboBox1.Text == "Adres") alan = "Musteri_Adres";
 
-                if (comboBox1.Text == "Tümü")//eğer texbox boş ise
+                if (comboBox1.Text == "Tümü")
                 {
                     frm2.bag.Open();
                     frm2.tabloMusteri.Clear();
@@ -99,7 +99,7 @@ namespace SuperMarketÖdev
                 {
                     int adet;
                     adet = int.Parse(textBox7.Text);
-                    frm2.bag.Open();//http://www.gorselprogramlama.com
+                    frm2.bag.Open();
                     frm2.kmt.Connection = frm2.bag;
                     frm2.kmt.CommandText = "INSERT INTO Satis(Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih) VALUES ('" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + comboBox2.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox9.Text + "','" + dateTimePicker1.Text + "') ";         
                     frm2.kmt.ExecuteNonQuery();                  
@@ -134,13 +134,14 @@ namespace SuperMarketÖdev
         {
             try
             {
-                textBox8.Text = (int.Parse(textBox6.Text) * int.Parse(textBox7.Text)).ToString();
+                textBox8.Text = (double.Parse(textBox6.Text) * double.Parse(textBox7.Text)).ToString();
             }
             catch
             {
                 ;   
             }
         }
+        
         private void comboBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
@@ -150,8 +151,8 @@ namespace SuperMarketÖdev
         {
             frm2.urunSatisFiyatTextEkle();
         }
-
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+       
+            private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
            
         }
@@ -161,6 +162,11 @@ namespace SuperMarketÖdev
             textBox3.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             textBox5.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

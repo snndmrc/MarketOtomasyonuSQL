@@ -307,6 +307,7 @@
             // 
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.textBox7.Location = new System.Drawing.Point(595, 448);
+            this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(121, 22);
             this.textBox7.TabIndex = 38;
@@ -314,11 +315,13 @@
             // 
             // textBox8
             // 
+            this.textBox8.Enabled = false;
             this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.textBox8.Location = new System.Drawing.Point(595, 479);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(121, 22);
             this.textBox8.TabIndex = 39;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // textBox9
             // 

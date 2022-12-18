@@ -62,7 +62,7 @@ namespace SuperMarketÖdev
                     frm2.kmt.Connection = frm2.bag;
                     frm2.kmt.CommandText = "DELETE from Musteri WHERE Musteri_TC='" + dataGridView1.CurrentRow.Cells[2].Value.ToString() + "'";
                     frm2.kmt.ExecuteNonQuery();
-                    frm2.kmt.Dispose();//http://www.gorselprogramlama.com
+                    frm2.kmt.Dispose();
                     frm2.bag.Close();
                     frm2.musteriListele();
                 }

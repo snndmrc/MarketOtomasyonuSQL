@@ -76,13 +76,11 @@ namespace SuperMarketÖdev
             {
                 int adet;
 
-                adet = int.Parse(textBox3.Text);
-                //adet değişkenine textbox3 deki değeri ata.
+                adet = int.Parse(textBox3.Text);              
                 frm2.bag.Open();
                 frm2.kmt.Connection = frm2.bag;
 
-                frm2.kmt.CommandText = "UPDATE Stok SET Adet=Adet+'" + adet + "' WHERE Urun_Adi='" + textBox2.Text + "' ";
-                //urunAdi textbox2 texti olan kaydın adet alan değerini adet değişkeni kadar artır.
+                frm2.kmt.CommandText = "UPDATE Stok SET Adet=Adet+'" + adet + "' WHERE Urun_Adi='" + textBox2.Text + "' ";             
                 frm2.kmt.ExecuteNonQuery();
                 frm2.kmt.Dispose();
                 frm2.bag.Close();
@@ -120,7 +118,7 @@ namespace SuperMarketÖdev
                 frm2.bag.Open();
                 frm2.tabloStok.Clear();
                 frm2.kmt.Connection = frm2.bag;
-                frm2.kmt.CommandText = "Select Urun_Adi,Adet,Birim_Fiyat,KDV,Satis_Fiyat from Stok";//tüm kayıtları seç
+                frm2.kmt.CommandText = "Select Urun_Adi,Adet,Birim_Fiyat,KDV,Satis_Fiyat from Stok";
                 adtr.SelectCommand = frm2.kmt;
                 adtr.Fill(frm2.tabloStok);
                 frm2.bag.Close();
