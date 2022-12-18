@@ -60,5 +60,10 @@ namespace SuperMarketÖdev
             }
             else MessageBox.Show("Girmiş olduğunuz Tc Kimlik mevcut !");
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

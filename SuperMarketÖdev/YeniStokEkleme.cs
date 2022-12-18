@@ -53,5 +53,10 @@ namespace SuperMarketÖdev
             }
             else MessageBox.Show("Girmiş olduğunuz Ürün mevcut !");
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
