@@ -211,7 +211,8 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(175, 22);
             this.dateTimePicker1.TabIndex = 10;
-            this.dateTimePicker1.Value = new System.DateTime(2022, 12, 13, 20, 22, 26, 0);
+            this.dateTimePicker1.Value = new System.DateTime(2022, 12, 19, 14, 31, 43, 0);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // Form2
             // 

@@ -357,6 +357,11 @@ namespace SuperMarketÖdev
         {
             Application.Exit();
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     
 }
