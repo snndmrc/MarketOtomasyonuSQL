@@ -13,6 +13,7 @@ namespace SuperMarketÖdev
 {
     public partial class Stokİşlemleri : Form
     {
+        Form1 frm1 = (Form1)Application.OpenForms["Form1"];
         public Form2 frm2;
         public Stokİşlemleri()
         {
@@ -21,7 +22,14 @@ namespace SuperMarketÖdev
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frm2.yeniStokEkleme.ShowDialog();
+            if(frm1.yetki.ToString() == "1")
+            {
+                frm2.yeniStokEkleme.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Bu alana giriş için yetkiniz yoktur.");
+            }
         }
 
         private void Stokİşlemleri_Load(object sender, EventArgs e)

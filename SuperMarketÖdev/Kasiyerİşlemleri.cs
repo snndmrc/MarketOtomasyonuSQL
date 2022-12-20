@@ -14,7 +14,7 @@ namespace SuperMarketÖdev
     public partial class Kasiyerİşlemleri : Form
     {
         public Form2 frm2;
-
+        Form1 frm1 = (Form1)Application.OpenForms["Form1"];
         public Kasiyerİşlemleri()
         {
             InitializeComponent();
@@ -63,11 +63,14 @@ namespace SuperMarketÖdev
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void Kasiyerİşlemleri_Load(object sender, EventArgs e)
         {
+            
+
+            
             frm2.kasiyerListele();
             try
             {

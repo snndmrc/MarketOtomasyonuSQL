@@ -135,6 +135,7 @@ namespace SuperMarketÖdev
             frm2.müşteriEkleme2.textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
             frm2.müşteriEkleme2.textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
             frm2.müşteriEkleme2.ShowDialog();
+            
         }
     }
 }

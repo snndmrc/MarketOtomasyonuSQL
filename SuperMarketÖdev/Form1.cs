@@ -22,11 +22,14 @@ namespace SuperMarketÖdev
         SqlDataReader dr;
         SqlCommand com;
 
-
-
+        
+        public string yetki;
         public Form1()
-        {
+        { 
+            
             InitializeComponent();
+            
+            
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -42,13 +45,14 @@ namespace SuperMarketÖdev
             com = new SqlCommand();
             con.Open();
             com.Connection= con;
-            com.CommandText = "Select *From Loginn where Kullanici_Adi='" + textBox1.Text 
+            com.CommandText = "Select *From Loginnn where Kullanici_Adi='" + textBox1.Text 
                 + "'And Sifre ='" + textBox2.Text + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
              
                 Form2 frm2 = new Form2();
+                yetki = dr["yetki"].ToString();
                 this.Hide();
                 frm2.ShowDialog();
                

@@ -17,6 +17,7 @@ namespace SuperMarketÖdev
 {
     public partial class Form2 : Form
     {
+        public Form1 form1;
         public ÜrünEkleme2 ÜrünEkleme2;
          public KasiyerEkleme2 kasiyerEkleme2;
          public MüşteriEkleme2 müşteriEkleme2;
@@ -33,14 +34,14 @@ namespace SuperMarketÖdev
          public YeniStokEkleme yeniStokEkleme;
          public YeniStokEkleme2 yeniStokEkleme2;
         
-
+        Form1 frm1 = (Form1)Application.OpenForms["Form1"];
       
        
 
         public  Form2()
         {
             InitializeComponent();
-
+            
             ÜrünEkleme2 = new ÜrünEkleme2();
             yeniStokEkleme2 = new YeniStokEkleme2();
             kasiyerEkleme2= new KasiyerEkleme2();
@@ -56,7 +57,7 @@ namespace SuperMarketÖdev
             firmaEkleme = new FirmaEkleme();
             stokİşlemleri = new Stokİşlemleri();
             yeniStokEkleme = new YeniStokEkleme();
-
+            
             ÜrünEkleme2.frm2 = this;
             yeniStokEkleme2.frm2 = this;
             kasiyerEkleme2.frm2 = this;
@@ -90,6 +91,7 @@ namespace SuperMarketÖdev
         public bool durum;
         public void gununSatisListele()
         {
+            
             tabloSatis.Clear();
             bag.Open();
             SqlDataAdapter adtr = new SqlDataAdapter("select Fatura_No,Musteri_Adi,Musteri_Soyadi,TC_Kimlik,Urun_Adi,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No,Tarih from Satis Where Tarih = '" + dateTimePicker1.Text + "'", bag);          
@@ -306,7 +308,15 @@ namespace SuperMarketÖdev
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            ürünEkranı.ShowDialog();
+            if(frm1.yetki.ToString() == "1")
+            {
+                ürünEkranı.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Yetkiniz Yoktur");
+                
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -328,9 +338,12 @@ namespace SuperMarketÖdev
         {
             stokİşlemleri.ShowDialog();
         }
-
+        
         private void Form2_Load(object sender, EventArgs e)
         {
+
+
+            
             gununSatisListele();
             try
             {
