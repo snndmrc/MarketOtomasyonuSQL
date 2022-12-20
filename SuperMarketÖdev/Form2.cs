@@ -314,7 +314,7 @@ namespace SuperMarketÖdev
             }
             else
             {
-                MessageBox.Show("Yetkiniz Yoktur");
+                MessageBox.Show("Bu alana giriş yetkiniz yoktur.");
                 
             }
         }
@@ -327,7 +327,14 @@ namespace SuperMarketÖdev
 
         private void button3_Click(object sender, EventArgs e)
         {
-           kasiyerİşlemleri.ShowDialog();
+           if(frm1.yetki.ToString() == "1" )
+            {
+              kasiyerİşlemleri.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Bu alana giriş yetkiniz yoktur.");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

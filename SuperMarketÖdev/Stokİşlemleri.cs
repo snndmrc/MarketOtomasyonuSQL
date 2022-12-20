@@ -52,25 +52,35 @@ namespace SuperMarketÖdev
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
+            if (frm1.yetki.ToString() == "1")
             {
-                DialogResult cevap;
-                cevap = MessageBox.Show("Kaydı silmek istediğinizden eminmisiniz", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
+                
+                try
                 {
-                    frm2.bag.Open();
-                    frm2.kmt.Connection = frm2.bag;
-                    frm2.kmt.CommandText = "DELETE from Stok WHERE Urun_Adi='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
-                    frm2.kmt.ExecuteNonQuery();
-                    frm2.kmt.Dispose();
-                    frm2.bag.Close();
-                    frm2.stokListele();
+                    DialogResult cevap;
+                    cevap = MessageBox.Show("Kaydı silmek istediğinizden eminmisiniz", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (cevap == DialogResult.Yes && dataGridView1.CurrentRow.Cells[0].Value.ToString().Trim() != "")
+                    {
+                        frm2.bag.Open();
+                        frm2.kmt.Connection = frm2.bag;
+                        frm2.kmt.CommandText = "DELETE from Stok WHERE Urun_Adi='" + dataGridView1.CurrentRow.Cells[0].Value.ToString() + "'";
+                        frm2.kmt.ExecuteNonQuery();
+                        frm2.kmt.Dispose();
+                        frm2.bag.Close();
+                        frm2.stokListele();
+                    }
+                }
+                catch
+                {
+                    ;
                 }
             }
-            catch
+            else
             {
-                ;
+                MessageBox.Show("Bu kaydı silmek için yetkiniz yoktur.");
             }
+
+           
         }
 
         private void button4_Click(object sender, EventArgs e)
