@@ -219,6 +219,8 @@ namespace SuperMarketÖdev
             double dbl = Double.Parse(text);
             sayaç += dbl;
             toplam_lbl.Text = sayaç.ToString(); */
+
+            /*
             UrunAdıKontrol();
             if(durum == true)
             {
@@ -258,7 +260,7 @@ namespace SuperMarketÖdev
             //komut.Parameters.AddWithValue("Kasa_No", textBox9.Text);
             //komut.ExecuteNonQuery();
             //bag.Close();
-
+            */
         }
 
         private void toplam_lbl_Click(object sender, EventArgs e)
