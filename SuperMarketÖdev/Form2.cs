@@ -86,6 +86,7 @@ namespace SuperMarketÖdev
         public DataTable tabloKasiyer = new DataTable();
         public DataTable tabloStok = new DataTable();
         public DataTable tabloSatis = new DataTable();
+        public DataTable tabloSepet = new DataTable();
         public SqlCommand kmt = new SqlCommand();
 
         public bool durum;
@@ -249,6 +250,20 @@ namespace SuperMarketÖdev
             bag.Close();
             oku.Dispose();
         }
+      
+         public void sepetListele()
+        {
+            
+            tabloSepet.Clear();
+            bag.Open();
+            SqlDataAdapter adtr = new SqlDataAdapter("Select Urun_Adı,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No from sepet", bag);
+            adtr.Fill(tabloSepet);
+            satisIslemleri.dataGridView2.DataSource = tabloSepet;
+            bag.Close();
+            
+
+
+        } 
         public void firmaComboEkle()
         {
             ürünekleme.comboBox1.Items.Clear();

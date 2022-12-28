@@ -118,7 +118,7 @@ namespace SuperMarketÖdev
             frm2.yeniStokEkleme2.textBox1.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             frm2.yeniStokEkleme2.textBox2.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
             frm2.yeniStokEkleme2.textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            frm2.yeniStokEkleme2.ShowDialog();
+           // frm2.yeniStokEkleme2.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

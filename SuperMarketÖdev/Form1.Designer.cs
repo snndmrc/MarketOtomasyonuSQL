@@ -162,7 +162,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.ImageKey = "close.png";
+            this.button2.ImageKey = "interview.png";
             this.button2.ImageList = this.ımageList1;
             this.button2.Location = new System.Drawing.Point(399, 360);
             this.button2.Name = "button2";
@@ -175,7 +175,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.ImageIndex = 10;
+            this.button1.ImageIndex = 5;
             this.button1.ImageList = this.ımageList1;
             this.button1.Location = new System.Drawing.Point(266, 360);
             this.button1.Name = "button1";

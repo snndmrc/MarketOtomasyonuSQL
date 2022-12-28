@@ -14,12 +14,17 @@ namespace SuperMarketÖdev
     public partial class SatisIslemleri : Form
     {
         public Form2 frm2;
+        public double sayaç;
+        public SqlConnection bag = new SqlConnection(@"Data Source=MSIBRAVO\SQLEXPRESS01;Initial Catalog=Tablo;Integrated Security=True");
+        DataSet daset = new DataSet();
         public SatisIslemleri()
         {
             InitializeComponent();
         }
 
         bool durum = false;
+
+       
 
         void stokUrunAdetKontrol()
         {
@@ -40,6 +45,8 @@ namespace SuperMarketÖdev
         {
             frm2.musteriListele();
             frm2.urunSatisComboEkle();
+            
+
             try
             {
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -49,6 +56,13 @@ namespace SuperMarketÖdev
                 dataGridView1.Columns[3].HeaderText = "Cep Tel";
                 dataGridView1.Columns[4].HeaderText = "Ev Tel";
                 dataGridView1.Columns[5].HeaderText = "Adres";
+                dataGridView2.Columns[0].HeaderText = "Urun_Adı";
+                dataGridView2.Columns[1].HeaderText = "Satis_Fiyat";
+                dataGridView2.Columns[2].HeaderText = "Adet";
+                dataGridView2.Columns[3].HeaderText = "Toplam_Tutar";
+                dataGridView2.Columns[4].HeaderText = "Kasa_No";
+
+
             }
             catch
             {
@@ -170,6 +184,94 @@ namespace SuperMarketÖdev
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void btn_ekle_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void UrunAdıKontrol()
+        {
+            durum = true;
+            bag.Open();
+            frm2.kmt.Connection = bag;
+            frm2.kmt.CommandText = "Select *from sepet ";
+            SqlDataReader oku;
+            oku = frm2.kmt.ExecuteReader();
+            while (oku.Read())
+            {
+                if (comboBox2.Text == oku["Urun_Adı"].ToString())
+                {
+                    durum = false;
+                }
+            }
+            bag.Close();
+
+
+        }
+        private void ekle_btn_Click(object sender, EventArgs e)
+        {
+            /*string text = textBox8.Text;
+            double dbl = Double.Parse(text);
+            sayaç += dbl;
+            toplam_lbl.Text = sayaç.ToString(); */
+            UrunAdıKontrol();
+            if(durum == true)
+            {
+                frm2.bag.Open();
+                frm2.kmt.Connection = frm2.bag;
+                frm2.kmt.CommandText = "INSERT INTO sepet(Urun_Adı,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No) VALUES ('" + comboBox2.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox9.Text + "') ";
+                frm2.kmt.ExecuteNonQuery();
+                frm2.kmt.Dispose();
+                frm2.bag.Close();
+                frm2.tabloSepet.Clear();
+                frm2.sepetListele();
+            }
+            else
+            {   
+                bag.Open();
+                 SqlCommand komut1 = new SqlCommand("update sepet set Adet=Adet +'"+ int.Parse(textBox7.Text) + "'where Urun_Adı='" +comboBox2.Text+ "'", bag);
+                komut1.ExecuteNonQuery();
+                SqlCommand komut2 = new SqlCommand("update sepet set Toplam_Tutar = Adet * Satis_Fiyat where Urun_Adı='" +comboBox2.Text + "'", bag);
+                komut2.ExecuteNonQuery();
+                bag.Close();
+
+            }
+
+            frm2.bag.Open();
+            frm2.kmt.Connection = frm2.bag;
+            frm2.kmt.CommandText = "INSERT INTO Sepet(Urun_Adı,Satis_Fiyat,Adet,Toplam_Tutar,Kasa_No) VALUES ('" + comboBox2.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox9.Text + "') ";
+            frm2.kmt.ExecuteNonQuery();
+            frm2.kmt.Dispose();
+            frm2.bag.Close();
+            frm2.tabloSepet.Clear();
+            frm2.sepetListele();
+
+            //komut.Parameters.AddWithValue("Urun_Adı",comboBox1.Text); 
+            //komut.Parameters.AddWithValue("Urun_Adı", textBox6.Text);
+            //komut.Parameters.AddWithValue("Adet", textBox7.Text);
+            //komut.Parameters.AddWithValue("Toplam_Tutar", textBox8.Text);
+            //komut.Parameters.AddWithValue("Kasa_No", textBox9.Text);
+            //komut.ExecuteNonQuery();
+            //bag.Close();
+
+        }
+
+        private void toplam_lbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
